@@ -12,39 +12,60 @@ namespace Brackets
         {
             Random rng = new Random();
 
-
-        Bowler Ava = new Bowler("Ava", 253, 251, 268);
-            Bowler Bob = new Bowler("Bob", 252, 251, 268);
-            Bowler Dave = new Bowler("Dave", 244, 249, 299);
-            Bowler Eve = new Bowler("Eve", 239, 300, 300);
-            Bowler Frank = new Bowler("Frank", 288, 275, 286);
-            Bowler Gina = new Bowler("Gina", 298, 277, 279);
-            Bowler Hank = new Bowler("Hank", 299, 281, 269);
-            Bowler Ivy = new Bowler("Ivy", 228, 295, 294);
-
             List<Bowler> list1 = new List<Bowler>();
 
-            list1.Add(Ava);
-            list1.Add(Bob);
-            list1.Add(Dave);
-            list1.Add(Eve);
-            list1.Add(Frank);
-            list1.Add(Gina);
-            list1.Add(Hank);
-            list1.Add(Ivy);
+            //get all lines from bowler file to an array of strings
+            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\cgruse\Desktop\tournament.txt");
+        
+            //loop through lines of file
+            for(int i = 0; i < lines.Count(); i++)
+            {
+                //split lines into name and three scores and put them into an array
+                string[] bowler = lines[i].Split(new char[0]);
+                //get name from string array
+                string name = bowler[0];
+                //get games from string array
+                int game1 = Convert.ToInt32(bowler[1]);
+                int game2 = Convert.ToInt32(bowler[2]);
+                int game3 = Convert.ToInt32(bowler[3]);
+                //add bowler objects to list1.
+                list1.Add(new Bowler(name, game1, game2, game3));
+            }
 
+            //shuffle list and store it into list2.
             List<Bowler> list2 = Shuffle(list1, rng);
+
+            //might need this to know who played who
+            //list1 = list2.ToList();
+
             foreach (Bowler a in list2)
             {
                 Console.WriteLine(a);
             }
+            Console.WriteLine("\n");
 
+            //first games
             Bracket1(list2);
 
             foreach (Bowler a in list2)
             {
                 Console.WriteLine(a);
             }
+            Console.WriteLine("\n");
+
+            //second games
+            Bracket2(list2);
+
+            foreach (Bowler a in list2)
+            {
+                Console.WriteLine(a);
+            }
+            Console.WriteLine("\n");
+
+            //third game
+            Bracket3(list2);
+
+            Console.WriteLine(list2[0] + " is the winner");
 
             Console.ReadKey();
         }
@@ -83,6 +104,33 @@ namespace Brackets
                 {
                     list2.Remove(list2[i + 1]);
                 }
+            }
+        }
+
+        public static void Bracket2(List<Bowler> list2)
+        {
+            for (int i = 0; i < list2.Count; i++)
+            {
+                if(list2[i].Game2 < list2[i + 1].Game2)
+                {
+                    list2.Remove(list2[i]);
+                }
+                else
+                {
+                    list2.Remove(list2[i + 1]);
+                }
+            }
+        }
+
+        public static void Bracket3(List<Bowler> list2)
+        {
+            if(list2[0].Game3 < list2[1].Game3)
+            {
+                list2.Remove(list2[0]);
+            }
+            else
+            {
+                list2.Remove(list2[1]);
             }
         }
     }
