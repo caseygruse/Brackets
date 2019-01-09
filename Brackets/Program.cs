@@ -40,7 +40,7 @@ namespace Brackets
 
             foreach (Bowler a in list2)
             {
-                Console.WriteLine(a);
+                Console.WriteLine(a + " " + a.Game1);
             }
             Console.WriteLine("\n");
 
@@ -49,7 +49,7 @@ namespace Brackets
 
             foreach (Bowler a in list2)
             {
-                Console.WriteLine(a);
+                Console.WriteLine(a + " " + a.Game2);
             }
             Console.WriteLine("\n");
 
@@ -58,7 +58,7 @@ namespace Brackets
 
             foreach (Bowler a in list2)
             {
-                Console.WriteLine(a);
+                Console.WriteLine(a + " " + a.Game3);
             }
             Console.WriteLine("\n");
 
@@ -91,7 +91,10 @@ namespace Brackets
             }
             return list2;
         }
-
+        /// <summary>
+        /// compares bowlers first game and removes losers from list2.
+        /// </summary>
+        /// <param name="list2"></param>
         public static void Bracket1(List<Bowler> list2)
         {
             for(int i = 0; i < list2.Count; i++)
@@ -106,7 +109,7 @@ namespace Brackets
                 }
             }
         }
-
+        //compares bowlers second games and romoves losers from list2
         public static void Bracket2(List<Bowler> list2)
         {
             for (int i = 0; i < list2.Count; i++)
@@ -121,7 +124,7 @@ namespace Brackets
                 }
             }
         }
-
+        //compares bowlers third game and removes the loser.
         public static void Bracket3(List<Bowler> list2)
         {
             if(list2[0].Game3 < list2[1].Game3)
